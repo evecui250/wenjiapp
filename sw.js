@@ -2,7 +2,7 @@
 // Everything is served from this cache first, so once the app has been
 // opened it keeps working without a connection — or if the website is gone.
 // A new deploy changes VERSION, which makes the browser install the update.
-const VERSION = '144dc8b2afdf';
+const VERSION = 'ae350cff91b8';
 const CACHE = 'doi-' + VERSION;
 const FILES = [
   "./",
