@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/wenjiapp/">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="A private journal for the decisions you keep going back and forth on.">
+  <meta name="theme-color" content="#FDF2EC">
+
+  <!-- Installed to the home screen, it opens like an app -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Do I?">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>Do I?</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    html, body { margin: 0; height: 100%; background: #FDF2EC; }
+  </style>
+
+  <script>
+    // Ask the browser not to clear this site's data when space runs low.
+    if (navigator.storage && navigator.storage.persist) {
+      navigator.storage.persist().catch(function () {});
+    }
+
+    // Keeps the whole app cached so it still opens offline — or if this
+    // website ever goes away.
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('sw.js').catch(function () {});
+      });
+      // The first visit loads the renderer etc. before sw.js is running,
+      // so tell it what was already fetched and let it cache those too.
+      var cacheLoaded = function () {
+        navigator.serviceWorker.ready.then(function (reg) {
+          var urls = performance.getEntriesByType('resource').map(function (e) { return e.name; });
+          if (reg.active) reg.active.postMessage({ type: 'cache-loaded', urls: urls });
+        });
+      };
+      window.addEventListener('flutter-first-frame', cacheLoaded);
+      navigator.serviceWorker.ready.then(function () { setTimeout(cacheLoaded, 3000); });
+    }
+  </script>
+</head>
+<body>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
