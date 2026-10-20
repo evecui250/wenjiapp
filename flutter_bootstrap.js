@@ -39,4 +39,9 @@ _flutter.buildConfig = {"engineRevision":"4c525dac5ebe5971c5708ef73558ed8edcf4a3
 // No serviceWorkerSettings: Flutter's own service worker is deprecated and
 // only unregisters itself. Offline support comes from sw.js instead (see
 // index.html), which would otherwise be replaced by Flutter's.
-_flutter.loader.load();
+// Fallback fonts (Chinese, emoji…) from this site rather than
+// fonts.gstatic.com, which is blocked in mainland China — see
+// tool/mirror_fallback_fonts.py.
+_flutter.loader.load({
+  config: { fontFallbackBaseUrl: 'fonts/' },
+});

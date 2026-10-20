@@ -20,6 +20,20 @@
   <link rel="manifest" href="manifest.json">
   <style>
     html, body { margin: 0; height: 100%; background: #FDF2EC; }
+    #loading {
+      position: fixed; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 4px;
+      font: 15px/1.6 -apple-system, BlinkMacSystemFont, "PingFang SC",
+        "Microsoft YaHei", sans-serif;
+      color: #6B5259; text-align: center; padding: 0 24px;
+    }
+    #loading .dot {
+      width: 14px; height: 14px; border-radius: 50%; background: #B96B6E;
+      margin-bottom: 12px; animation: pulse 1.2s ease-in-out infinite;
+    }
+    #loading p { margin: 0; }
+    #slow { font-size: 13px; color: #8B747A; margin-top: 10px !important; }
+    @keyframes pulse { 50% { opacity: .25; transform: scale(.7); } }
   </style>
 
   <script>
@@ -48,6 +62,22 @@
   </script>
 </head>
 <body>
+  <!-- Shown until the app draws its first frame; a slow first load
+       otherwise looks like a blank, broken page. -->
+  <div id="loading">
+    <div class="dot"></div>
+    <p>正在加载… Loading…</p>
+    <p id="slow" hidden>第一次打开需要多一点时间，请保持网络连接。<br>
+      First visit takes a little longer — please stay online.</p>
+  </div>
+  <script>
+    setTimeout(function () {
+      var s = document.getElementById('slow'); if (s) s.hidden = false;
+    }, 8000);
+    window.addEventListener('flutter-first-frame', function () {
+      var l = document.getElementById('loading'); if (l) l.remove();
+    });
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

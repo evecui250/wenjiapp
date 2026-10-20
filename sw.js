@@ -2,20 +2,17 @@
 // Everything is served from this cache first, so once the app has been
 // opened it keeps working without a connection — or if the website is gone.
 // A new deploy changes VERSION, which makes the browser install the update.
-const VERSION = 'ae350cff91b8';
+const VERSION = '9977b54b6729';
 const CACHE = 'doi-' + VERSION;
 const FILES = [
   "./",
   "assets/AssetManifest.bin",
   "assets/AssetManifest.bin.json",
   "assets/FontManifest.json",
-  "assets/NOTICES",
-  "assets/assets/fonts/NotoSerifSC-Bold.ttf",
-  "assets/assets/fonts/NotoSerifSC-Medium.ttf",
-  "assets/assets/fonts/NotoSerifSC-Variable.ttf",
   "assets/assets/fonts/PlayfairDisplay-Variable.ttf",
   "assets/assets/fonts/Quicksand-Variable.ttf",
   "assets/assets/fonts/WorkSans-Variable.ttf",
+  "assets/assets/fonts_web/NotoSerifSC-Welcome.ttf",
   "assets/assets/images/ChatGPT%2520Image%2520Sep%252010,%25202026,%252008_32_16%2520AM.png",
   "assets/assets/images/ChatGPT%2520Image%2520Sep%252010,%25202026,%252009_58_11%2520AM.png",
   "assets/assets/images/ChatGPT%2520Image%2520Sep%252010,%25202026,%252010_09_17%2520AM.png",
